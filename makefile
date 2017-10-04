@@ -1,8 +1,8 @@
 CC=g++
-CFLAGS=-c -Wall
-SOURCES=main.cpp prime.cpp 
+CFLAGS=-c -Wall -std=c++11
+SOURCES=main.cpp app.cpp 
 OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=prime
+EXECUTABLE=app.out
 
 all: $(SOURCES) $(EXECUTABLE)
 	
@@ -11,3 +11,6 @@ $(EXECUTABLE): $(OBJECTS)
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm -f *.o && clear
