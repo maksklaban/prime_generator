@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-c -Wall -std=c++11
-SOURCES=main.cpp app.cpp 
+SOURCES=main.cpp app.cpp prime.cpp 
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=app.out
 
