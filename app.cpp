@@ -35,28 +35,15 @@ void Application::downloadXml() {
 
 void Application::uploadResults() {
     std::fstream f(this->sourceFile, std::fstream::in);
-    std::fstream f1(this->resFile, std::fstream::out);
     
     if (f.is_open()) {
+        std::fstream f1(this->resFile, std::fstream::out);
         std::string bufferStr((std::istreambuf_iterator<char>(f)),
                               std::istreambuf_iterator<char>());;
 
 
-        // std::cout << bufferStr <<std::endl;
-
         this->genResultsStr(&bufferStr);
-        // std::cout << bufferStr <<std::endl;
-        // std::size_t pos = bufferStr.find("</root>");
-        // std::string buff("\n  <prime> ");
 
-        // for (auto x: *(this->results)) {
-        //     buff += std::to_string(x);
-        //     buff += " ";
-        // }
-
-        // buff += "</prime> \n  ";
-
-        // bufferStr.insert(pos, buff);
         f1.write(bufferStr.data(), bufferStr.size());
 
         f.close();
@@ -65,23 +52,6 @@ void Application::uploadResults() {
         throw FileErrorException();
     }
 }
-
-// std::string& Application::genResultsStr(std::string* buffer) {
-//     std::size_t pos = buffer->find("</root>");
-//     std::string buff("\n  <prime> ");
-
-//     for (auto x: *(this->results)) {
-//         buff += std::to_string(x);
-//         buff += " ";
-//     }
-
-//     buff += "</prime> \n  ";
-
-//     buffer->insert(pos, buff);
-
-//     return buffer;
-// }
-
 
 const std::shared_ptr<std::set<int>> Application::getResults() {
     return this->results;

@@ -2,12 +2,13 @@ CC=g++
 CFLAGS=-c -Wall -std=c++11
 SOURCES=main.cpp app.cpp prime.cpp 
 OBJECTS=$(SOURCES:.cpp=.o)
+LDFLAGS=-lpthread
 EXECUTABLE=app.out
 
 all: $(SOURCES) $(EXECUTABLE)
 	
 $(EXECUTABLE): $(OBJECTS) 
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) 
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@

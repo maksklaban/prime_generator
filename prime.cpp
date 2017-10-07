@@ -19,9 +19,16 @@ void PrimeGen::genResultsStr(std::string* buffer) {
 }
 
 void PrimeGen::calculate() {
+    std::vector<std::thread> threads;
+
     for (auto x: *(this->ranges)) {
-        this->calcPrime(x.low, x.hign);
+        threads.push_back(std::thread(&PrimeGen::calcPrime, this, x.low, x.hign));
+        
     }
+    for (auto& y: threads) {
+        y.join();
+    }
+
     this->uploadResults();
 }
 
@@ -43,14 +50,18 @@ void PrimeGen::calcPrime(int low, int hign) {
 
     if (i % 2 == 0) {
         if (i == 2) {
+            this->mtx.lock();
             this->results->insert(i);
+            this->mtx.unlock();
         } 
         i += 1; 
     }
 
     for ( ; i <= hign; i += 2) {
         if (isPrime(i)) {
+            this->mtx.lock();
             this->results->insert(i);
+            this->mtx.unlock();
         }
     }
 }

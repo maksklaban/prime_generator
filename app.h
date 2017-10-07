@@ -7,6 +7,8 @@
 #include <regex>
 #include <string>
 #include <set>
+#include <thread>
+#include <mutex>
 
 #define SOURCEFILE "source.xml"
 #define RESULTFILE "result.xml"
@@ -27,6 +29,7 @@ class Application {
         std::regex pattern;
         std::string sourceFile;
         std::string resFile;
+        std::mutex mtx;
 
         void downloadXml();
         void uploadResults();
