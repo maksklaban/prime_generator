@@ -22,6 +22,7 @@ void Application::downloadXml() {
 
         while (std::regex_search(bufferStr,m,this->pattern)) {
             Range temp = {std::stoi(m[1]), std::stoi(m[2])};
+            
             ranges->push_back(temp);
             bufferStr = m.suffix().str();
         }
@@ -53,14 +54,23 @@ void Application::uploadResults() {
     }
 }
 
-const std::shared_ptr<std::set<int>> Application::getResults() {
+const std::string Application::getSourceFileName() const {
+    return this->sourceFile;
+}
+
+const std::string Application::getResFileName() const {
+    return this->resFile;
+}
+
+const std::regex Application::getPatt() const {
+    return this->pattern;
+}
+
+const std::shared_ptr<std::set<int>> Application::getResults() const {
     return this->results;
 }
 
-const std::shared_ptr<std::vector<Range>> Application::getRanges() {
+const std::shared_ptr<std::vector<Range>> Application::getRanges() const {
     return this->ranges;
 }
 
-std::regex Application::getPatt() {
-    return this->pattern;
-}

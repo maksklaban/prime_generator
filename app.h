@@ -29,7 +29,6 @@ class Application {
         std::regex pattern;
         std::string sourceFile;
         std::string resFile;
-        std::mutex mtx;
 
         void downloadXml();
         void uploadResults();
@@ -38,9 +37,11 @@ class Application {
         Application(std::regex pattern, std::string sourceFile=SOURCEFILE, std::string resFile=RESULTFILE);
         virtual ~Application();
 
-        std::regex getPatt();
-        const std::shared_ptr<std::vector<Range>> getRanges();
-        const std::shared_ptr<std::set<int>> getResults();
+        const std::string getSourceFileName() const;
+        const std::string getResFileName() const;
+        const std::regex getPatt() const;
+        const std::shared_ptr<std::vector<Range>> getRanges() const;
+        const std::shared_ptr<std::set<int>> getResults() const;
 
 
         virtual void calculate() = 0;

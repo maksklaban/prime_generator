@@ -6,6 +6,8 @@
 
 class PrimeGen : public Application {
     protected:
+        std::mutex mtx;
+        
         bool isPrime(int n);
         void calcPrime(int low, int hign);
 
