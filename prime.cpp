@@ -4,6 +4,7 @@ PrimeGen::PrimeGen(std::regex pattern, std::string sourceFile, std::string resFi
 
 PrimeGen::~PrimeGen() {}
 
+//Generate calc results in xml style
 void PrimeGen::genResultsStr(std::string* buffer) {
     std::size_t pos = buffer->find("</root>");
     std::string buff("  <prime> ");
@@ -18,6 +19,7 @@ void PrimeGen::genResultsStr(std::string* buffer) {
     buffer->insert(pos, buff);
 }
 
+//In parallel, it calculates all ranges
 void PrimeGen::calculate() {
     std::vector<std::thread> threads;
 
@@ -41,6 +43,7 @@ bool PrimeGen::isPrime(int n) {
     return true;
 }
 
+//Thread-safety upload results in set
 void PrimeGen::calcPrime(int low, int hign) {
     int i = (low > 2) ? low : 2;
 

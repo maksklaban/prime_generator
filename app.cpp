@@ -1,5 +1,6 @@
 #include "app.h"
 
+
 Application::Application(std::regex pattern, std::string sourceFile, std::string resFile) {
     this->pattern = pattern;
     this->sourceFile = sourceFile;
@@ -11,7 +12,7 @@ Application::Application(std::regex pattern, std::string sourceFile, std::string
 
 Application::~Application() {}
 
-
+//Check if source file exist, obtains data for calculations in Range struct using regex
 void Application::downloadXml() {
     std::fstream f(this->sourceFile, std::fstream::in);
 
@@ -34,6 +35,7 @@ void Application::downloadXml() {
     }
 }
 
+//Update source data with results string (generate in childs classes); upload in ohter file
 void Application::uploadResults() {
     std::fstream f(this->sourceFile, std::fstream::in);
     
