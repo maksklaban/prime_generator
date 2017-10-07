@@ -15,11 +15,11 @@ int main(int argc, char const *argv[]) {
     auto test = new PrimeGen(pattern);
     test->calculate();
 
-    auto test1 = test->getResults();
+    // auto test1 = test->getResults();
 
-    for (auto x: *test1) {
-        std::cout << x << " ";
-    }
+    // for (auto x: *test1) {
+    //     std::cout << x << " ";
+    // }
     delete test;
     // std::shared_ptr<Application> test(new Application(b));
     return 0;

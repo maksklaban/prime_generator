@@ -5,14 +5,16 @@
 
 
 class PrimeGen : public Application {
-    private:
+    protected:
         bool isPrime(int n);
         void calcPrime(int low, int hign);
+
+        void genResultsStr(std::string* buffer) override;
     public:
-        PrimeGen(std::regex pattern);
+        PrimeGen(std::regex pattern, std::string sourceFile=SOURCEFILE, std::string resFile=RESULTFILE);
         virtual ~PrimeGen();
         
-        void calculate();
+        void calculate() override;
 };
 
 

@@ -1,14 +1,28 @@
 #include "prime.h"
 
-PrimeGen::PrimeGen(std::regex pattern) : Application(pattern) {}
+PrimeGen::PrimeGen(std::regex pattern, std::string sourceFile, std::string resFile) : Application(pattern, sourceFile, resFile) {}
 
 PrimeGen::~PrimeGen() {}
 
+void PrimeGen::genResultsStr(std::string* buffer) {
+    std::size_t pos = buffer->find("</root>");
+    std::string buff("  <prime> ");
+
+    for (auto x: *(this->results)) {
+        buff += std::to_string(x);
+        buff += " ";
+    }
+
+    buff += "</prime> \n  ";
+
+    buffer->insert(pos, buff);
+}
+
 void PrimeGen::calculate() {
     for (auto x: *(this->ranges)) {
-        // std::cout << x.low << " " << x.hign << std::endl;
         this->calcPrime(x.low, x.hign);
     }
+    this->uploadResults();
 }
 
 bool PrimeGen::isPrime(int n) {

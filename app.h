@@ -23,19 +23,22 @@ class FileErrorException {};
 class Application {
     protected:
         std::shared_ptr<std::set<int>> results;
-        std::regex pattern;
         std::shared_ptr<std::vector<Range>> ranges;
+        std::regex pattern;
+        std::string sourceFile;
+        std::string resFile;
 
+        void downloadXml();
+        void uploadResults();
+        virtual void genResultsStr(std::string* buffer) = 0; 
     public:
-        Application(std::regex pattern);
+        Application(std::regex pattern, std::string sourceFile=SOURCEFILE, std::string resFile=RESULTFILE);
         virtual ~Application();
 
         std::regex getPatt();
         const std::shared_ptr<std::vector<Range>> getRanges();
         const std::shared_ptr<std::set<int>> getResults();
 
-        void downloadXml(std::string filename=SOURCEFILE);
-        // void uploadResults(std::string filename=RESULTFILE);
 
         virtual void calculate() = 0;
 };
