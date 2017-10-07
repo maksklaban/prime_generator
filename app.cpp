@@ -23,7 +23,9 @@ void Application::downloadXml() {
 
         while (std::regex_search(bufferStr,m,this->pattern)) {
             Range temp = {std::stoi(m[1]), std::stoi(m[2])};
+            std::cout << std::stoi(m[1]) << " " << std::stoi(m[2]) << std::endl;
             
+
             ranges->push_back(temp);
             bufferStr = m.suffix().str();
         }
@@ -35,7 +37,7 @@ void Application::downloadXml() {
     }
 }
 
-//Update source data with results string (generate in childs classes); upload in ohter file
+//Update source data with results string (generate in childs classes); upload in other file
 void Application::uploadResults() {
     std::fstream f(this->sourceFile, std::fstream::in);
     
