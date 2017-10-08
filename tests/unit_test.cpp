@@ -91,10 +91,11 @@ TEST_CASE("prime generator test(test1.xml filesource)", "[PrimeGen]") {
         REQUIRE(test->getSourceFileName() == "test1.xml");
         REQUIRE(test->getResFileName() == "result1.xml");
         REQUIRE(ranges->empty() == false);
-        REQUIRE(ranges->size() == 3);
+        REQUIRE(ranges->size() == 4);
         REQUIRE((*ranges)[0].low == -100);
         REQUIRE((*ranges)[0].hign == 100);
-        REQUIRE((*ranges)[2].hign == 100);
+        REQUIRE((*ranges)[2].hign == 173);
+        REQUIRE((*ranges)[3].hign == 100);
     }
 
     SECTION("Calculation results") {
@@ -105,7 +106,7 @@ TEST_CASE("prime generator test(test1.xml filesource)", "[PrimeGen]") {
         results = test->getResults();
 
         REQUIRE(results->empty() == false);
-        REQUIRE(results->size() == 25);
+        REQUIRE(results->size() == 26);
         REQUIRE(results->count(2) == 1);
         REQUIRE(results->count(5) != 2);
         REQUIRE(results->count(-1) == 0);
@@ -115,6 +116,21 @@ TEST_CASE("prime generator test(test1.xml filesource)", "[PrimeGen]") {
         REQUIRE(results->count(13) == 1);
         REQUIRE(results->count(1) == 0);
         REQUIRE(results->count(-13) == 0);
-    }
+        REQUIRE(results->count(173) == 1);
+        }
 
+    SECTION("Result file tests") {
+        using Catch::Matchers::Contains;
+
+        std::fstream f(test->getResFileName());
+        std::string bufferStr((std::istreambuf_iterator<char>(f)),
+                      std::istreambuf_iterator<char>());
+
+        REQUIRE(f.is_open() == true);
+
+        REQUIRE_THAT( bufferStr, Contains("<prime> 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 "
+                                          "79 83 89 97 173 </prime> \n  </root>"));
+
+        f.close();
+    }
 }

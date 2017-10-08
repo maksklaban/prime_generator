@@ -47,7 +47,7 @@ bool PrimeGen::isPrime(int n) {
 void PrimeGen::calcPrime(int low, int hign) {
     int i = (low > 2) ? low : 2;
 
-    if ((i > hign) | (hign < 2)) {
+    if (i > hign) {
         return;
     }
 
