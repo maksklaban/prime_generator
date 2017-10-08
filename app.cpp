@@ -23,9 +23,7 @@ void Application::downloadXml() {
 
         while (std::regex_search(bufferStr,m,this->pattern)) {
             Range temp = {std::stoi(m[1]), std::stoi(m[2])};
-            std::cout << std::stoi(m[1]) << " " << std::stoi(m[2]) << std::endl;
             
-
             ranges->push_back(temp);
             bufferStr = m.suffix().str();
         }
